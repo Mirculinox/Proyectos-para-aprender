@@ -1,0 +1,25 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Eliminar Perfil de {{ student.name }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h2 class="h4 mb-3 font-weight-normal">Eliminar Perfil de {{ student.name }} {{ student.surname }}</h2>
+                </div>
+                <div class="card-body text-center">
+                    <p>¿Estás seguro de que deseas eliminar este perfil?</p>
+                    <form method="post">
+                        {% csrf_token %}
+                        <button class="btn btn-danger" type="submit">Sí, eliminar</button>
+                        <a class="btn btn-secondary" href="{% url 'student_details' student.id %}">No, cancelar</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

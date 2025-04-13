@@ -1,0 +1,21 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Actualizar Objeto{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h2 class="text-center">Actualizar Objeto</h2>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.media }}
+                {{ form.as_p }}
+                <div class="text-center mt-4">
+                    <button type="submit" class="btn btn-primary">Actualizar Objeto</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

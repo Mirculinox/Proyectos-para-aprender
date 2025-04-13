@@ -1,0 +1,52 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Tienda{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Tienda</h1>
+    <p>Aquí puedes comprar objetos.</p>
+    {% if items %}
+        <div class="row">
+            {% for item in items %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            {% if item.item_image %}
+                                <img src="{{ item.item_image.url }}" alt="Imagen de perfil" class="img-fluid mb-3" style="max-width: 150px;">
+                            {% else %}
+                                <p>No hay imagen de perfil disponible.</p>
+                            {% endif %}
+                            <h3 class="card-title">{{ item.name }}</h3>
+                            <p class="card-text">{{ item.description }}</p>
+                            <p class="card-text"><strong>Precio:</strong> {{ item.price }} monedas</p>
+                            {% if user.is_teacher %}
+                                <a href="{% url 'update_item' item.id %}" class="btn btn-secondary">Editar</a>
+                                <form action="{% url 'delete_item' item.id %}" method="post" class="d-inline">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                                </form>
+                            {% elif user.is_student %}
+                                <form method="post" action="{% url 'buy_item' item.id %}" class="d-inline">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-primary">Comprar</button>
+                                </form>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No hay ítems disponibles</p>
+    {% endif %}
+    {% if user.is_teacher %}
+        <a href="{% url 'create_item' %}" class="btn btn-success">Crear nuevo objeto</a>
+    {% endif %}
+    {% if not_money %}
+        <p class="text-danger">{{ not_money }}</p>
+    {% endif %}
+</div>
+{% endblock %}
+
+

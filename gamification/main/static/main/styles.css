@@ -1,0 +1,30 @@
+/* Estilos para la barra de navegación */
+header nav ul {
+    list-style-type: none;  /* Elimina los puntos de lista */
+    padding: 0;  /* Elimina el relleno de la lista */
+    margin: 0;  /* Elimina el margen de la lista */
+    display: flex;  /* Hace que los elementos de la lista se dispongan en una fila */
+    justify-content: space-around;  /* Distribuye los elementos de manera uniforme */
+    background-color: #333;  /* Establece el color de fondo de la barra de navegación */
+}
+
+header nav ul li {
+    display: inline;  /* Hace que cada elemento de la lista se muestre en línea */
+}
+
+header nav ul li a {
+    color: white;  /* Establece el color del texto de los enlaces */
+    text-decoration: none;  /* Elimina el subrayado de los enlaces */
+    padding: 14px 20px;  /* Agrega espacio alrededor del texto de los enlaces */
+    display: block;  /* Hace que cada enlace sea un bloque */
+}
+
+header nav ul li a:hover {
+    background-color: #575757;  /* Cambia el color de fondo cuando se pasa el ratón por encima */
+}
+
+.mission-image {
+    border-radius: 8px;
+    width: 100%;  /* Ensure the image takes full width of its container */
+    height: auto; /* Maintain aspect ratio */
+}

@@ -1,0 +1,25 @@
+<!-- join_class.html -->
+{% extends 'main/base.html' %}
+
+{% block title %}Join Class{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="text-center mb-4">Join a Class</h2>
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="code">Class Code:</label>
+                    <input type="text" id="code" name="code" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Join</button>
+            </form>
+            <div class="text-center mt-3">
+                <a href="{% url 'classes' %}" class="btn btn-secondary">Back to Classes</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

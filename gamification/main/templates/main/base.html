@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <!-- Establece el conjunto de caracteres del documento -->
+    <meta charset="UTF-8">
+    <!-- Configura el viewport para hacer que el sitio web sea responsive -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Define el título de la página, que puede ser reemplazado por las páginas hijas -->
+    <title>{% block title %}Gamificación{% endblock %}</title>
+    <!-- Cargar la etiqueta static -->
+    {% load static %}
+    <!-- Enlaza la hoja de estilos CSS, que debe estar en la carpeta 'static/main/styles.css' -->
+    <link rel="stylesheet" href="{% static 'main/styles.css' %}">
+    <!-- Añadir Bootstrap CSS desde un CDN -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <!-- Definimos la cabecera de la página -->
+    <header>
+        <!-- Barra de navegación utilizando clases de Bootstrap -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <!-- Enlace al perfil del usuario, que es la vista inicial después de iniciar sesión -->
+            <a class="navbar-brand" href="{% url 'profile_redirect' %}">Inicio</a>
+            <!-- Botón para el menú colapsable en pantallas pequeñas -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Contenedor del menú colapsable -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <!-- Enlace a la página de Clases -->
+                    <li class="nav-item"><a class="nav-link" href="{% url 'classes' %}">Clases</a></li>
+                    <!-- Enlace a la página de Tienda -->
+                    <li class="nav-item"><a class="nav-link" href="{% url 'shop' %}">Tienda</a></li>
+                    <!-- Condicional para mostrar diferentes opciones si el usuario está autenticado -->
+                    {% if user.is_authenticated %}
+                        <!-- Enlace para cerrar sesión -->
+                        <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Cerrar sesión</a></li>
+                    {% else %}
+                        <!-- Enlaces para iniciar sesión o registrarse si el usuario no está autenticado -->
+                        <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Iniciar sesión</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Registrarse</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Definimos el cuerpo principal de la página, que puede ser reemplazado por las páginas hijas -->
+    <main class="container mt-4 mb-5">
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Definimos el pie de página -->
+    <footer class="footer mt-auto py-3 bg-dark text-white text-center mt-5">
+        <div class="container">
+            <span>© 2024 Gamificación. Todos los derechos reservados.</span>
+            <!-- Información de contacto -->
+            <p>Contacta con nosotros: <a href="mailto:contacto@gamificacion.com" class="text-white">contacto@gamificacion.com</a></p>
+        </div>
+    </footer>
+    <!-- Añadir jQuery y Bootstrap JS desde un CDN -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+

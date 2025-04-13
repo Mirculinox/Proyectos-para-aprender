@@ -1,0 +1,61 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <!-- Tarjeta para el perfil del estudiante -->
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h1 class="h3 mb-0">Perfil del Estudiante</h1>
+                </div>
+                <div class="card-body text-center">
+                    {% if student.profile_image %}
+                        <img src="{{ student.profile_image.url }}" alt="Imagen de perfil" class="img-fluid rounded-circle mb-3" style="max-width: 150px;">
+                    {% else %}
+                        <p>No hay imagen de perfil disponible.</p>
+                    {% endif %}
+                    <p><strong>Nombre:</strong> {{ student.name }}</p>
+                    <p><strong>Apellido:</strong> {{ student.surname }}</p>
+                    <p><strong>XP:</strong> {{ student.xp }}</p>
+                    <p><strong>Monedas:</strong> {{ student.coins }}</p>
+                    <p><strong>Salud:</strong> {{ student.health }}</p>
+                    <p><strong>Ausencias:</strong> {{ student.absences }}</p>
+                </div>
+            </div>
+            <!-- Tarjeta para los ítems del estudiante -->
+            <div class="card mt-4">
+                <div class="card-header bg-secondary text-white">
+                    <h2 class="h5 mb-0">Ítems del Estudiante</h2>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        {% for item in items %}
+                            <div class="col-md-4 mb-4">
+                                <div class="card">
+                                    {% if item.item_image %}
+                                        <img src="{{ item.item_image.url }}" alt="Imagen de item" class="card-img-top img-fluid" style="max-height: 150px;">
+                                    {% endif %}
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ item.name }}</h5>
+                                        <p class="card-text">{{ item.description }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="mt-4 text-center">
+                <a href="{% url 'update_student_profile' %}" class="btn btn-primary">Editar Perfil</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+<!--
+Muestra la información del estudiante obtenida desde la vista student_profile.
+{{ student.name }}, {{ student.surname }}, {{ student.xp }}, etc. son variables pasadas desde la vista a la plantilla.
+-->

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home</title>
+    <!-- Carga de Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Fuente personalizada de Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome para iconos -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Estilos personalizados -->
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: url('https://c8.alamy.com/compes/2bnrtc9/patron-de-juego-gamificacion-simbolos-de-negocios-achivement-gobernantes-motivacion-desafio-vector-fondo-sin-costuras-2bnrtc9.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+        }
+        .container {
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            padding: 30px;
+            margin-top: 10%;
+        }
+        .btn-primary {
+            background-color: #3498db;
+            border-color: #3498db;
+        }
+        .btn-primary:hover {
+            background-color: #2980b9;
+            border-color: #2980b9;
+        }
+        .btn-secondary {
+            background-color: #2ecc71;
+            border-color: #2ecc71;
+        }
+        .btn-secondary:hover {
+            background-color: #27ae60;
+            border-color: #27ae60;
+        }
+        .icon-box {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 3rem;
+        }
+        .icon-box i {
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container text-center">
+        <h1 class="mb-4">Bienvenido a la página de gamificación</h1>
+        <div class="row justify-content-center">
+            <!-- Cuadro con ícono de estudiante y botón para entrar como Alumno -->
+            <div class="col-md-4 mb-4">
+                <div class="icon-box">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+                <a href="{% url 'login' %}" class="btn btn-primary btn-block">Entrar como Alumno</a>
+            </div>
+            <!-- Cuadro con ícono de profesor y botón para entrar como Profesor -->
+            <div class="col-md-4 mb-4">
+                <div class="icon-box">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                </div>
+                <a href="{% url 'login' %}" class="btn btn-secondary btn-block">Entrar como Profesor</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Carga de Bootstrap JS y dependencias de jQuery y Popper.js -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

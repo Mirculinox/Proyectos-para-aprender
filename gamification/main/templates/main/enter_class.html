@@ -1,0 +1,75 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Clase: {{ class_instance.name }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <style>
+        .mission-image {
+            border-radius: 8px;
+            width: 100%;  /* Ensure the image takes full width of its container */
+            height: auto; /* Maintain aspect ratio */
+        }
+    </style>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="list-group">
+                <a href="?class_id={{ class_instance.id }}&view=missions" class="list-group-item list-group-item-action {% if view == 'missions' %}active{% endif %}">Misiones</a>
+                <a href="?class_id={{ class_instance.id }}&view=students" class="list-group-item list-group-item-action {% if view == 'students' %}active{% endif %}">Estudiantes</a>
+            </div>
+        </div>
+        <div class="col-md-9">
+            {% if view == 'missions' %}
+                <h1 class="mb-4">Misiones de la Clase</h1>
+                <ul class="list-group">
+                    {% for mission in missions %}
+                        <li class="list-group-item">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    {% if mission.mission_image %}
+                                        <img src="{{ mission.mission_image.url }}" alt="Imagen de Misión" class="img-fluid mission-image" style="max-width: 300px;">
+                                    {% endif %}
+                                    <h4 class="d-inline-block ml-2">{{ mission.title }}</h4>
+                                </div>
+                                <div>
+                                    <p class="mb-0">XP: {{ mission.xp_reward }}</p>
+                                    <p class="mb-0">Monedas: {{ mission.coin_reward }}</p>
+                                    <button class="btn btn-primary btn-sm" type="button" data-toggle="collapse" data-target="#missionDetails{{ mission.id }}" aria-expanded="false" aria-controls="missionDetails{{ mission.id }}">
+                                        Ver más
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="collapse mt-3" id="missionDetails{{ mission.id }}">
+                                <p>{{ mission.description|safe }}</p>
+                                <p>Penalización de Salud: {{ mission.health_penalty }}</p>
+                                {% if mission.document %}
+                                    <a href="{{ mission.document.url }}" class="btn btn-secondary mb-2">Descargar Documento</a>
+                                {% endif %}
+                                {% if user.is_teacher %}
+                                    <a href="{% url 'update_mission' mission.id %}" class="btn btn-sm btn-primary">Editar</a>
+                                    <a href="{% url 'delete_mission' mission.id %}" class="btn btn-sm btn-danger">Eliminar</a>
+                                {% endif %}
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+                {% if user.is_teacher %}
+                    <a href="{% url 'create_mission' class_instance.id %}" class="btn btn-success mt-3">Crear nueva misión</a>
+                {% endif %}
+            {% elif view == 'students' %}
+                <h1 class="mb-4">Estudiantes de la Clase</h1>
+                <ul class="list-group">
+                    {% for student in students %}
+                        <li class="list-group-item">
+                            <a href="{% url 'student_details' student.id %}">
+                                {{ student.name }} {{ student.surname }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
